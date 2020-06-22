@@ -1,0 +1,6 @@
+---
+# defaults file for sonar-scanner
+sonarqube_port: 9000
+default_retries: 60
+default_delay: 10
+sonar_scanner_cli_version: 4.0.0.1744
