@@ -2,7 +2,7 @@
 
 ![Basic role syntax check](https://github.com/nemonik/sonar-scanner-cli-role/workflows/Basic%20role%20syntax%20check/badge.svg)
 
-An Ansible role to install Sonar Scanner CLI. Known to work on CentOS 7, Alpine 3.10 and Ubuntu Bionic instances.
+An Ansible role to install [Sonar Scanner CLI](https://github.com/SonarSource/sonar-scanner-cli). Known to work on CentOS 7, Alpine 3.10 and Ubuntu Bionic instances.
 
 ## Requirements
 
