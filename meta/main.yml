@@ -1,6 +1,6 @@
 galaxy_info:
   author: Michael Joseph Walsh <walsh@nemonik.com>
-  description: Ansible role to configure sonar-scanner-cli
+  description: Ansible role to configure sonar-scanner CLI
   license: 3-Clause BSD License
   min_ansible_version: 2.4
   galaxy_tags:
