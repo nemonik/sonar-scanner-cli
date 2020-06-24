@@ -27,10 +27,13 @@
   block:
   - name: create /vagrant/cache/boxes if it doesn't exist
     shell: |
-      if [[ "windows" == "{{ host_os }}" && "{{ cache_path }}" == "/tmp" ]]; then
+      if [[ "windows" == "{{ host_os | default('') }}" && "{{ cache_path }}" == "/tmp" ]]; then
         sudo su
       fi
       mkdir -p {{ cache_path }}
+    when:
+      - cache_path is defined
+      - cache_path != '/tmp'
     args:
       executable: /bin/bash
    
@@ -49,7 +52,7 @@
 
   - name: cache https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/{{ sonar_scanner_archive }} to {{ cache_path }}
     shell: |
-      if [[ "windows" == "{{ host_os }}" && "{{ cache_path }}" == "/tmp" ]]; then
+      if [[ "windows" == "{{ host_os | default('') }}" && "{{ cache_path }}" == "/tmp" ]]; then
         sudo su
       fi
       wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/{{ sonar_scanner_archive }} --directory-prefix={{ cache_path }}
