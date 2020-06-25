@@ -25,12 +25,12 @@
 
 - name: install sonar-scanner cli
   block:
-  - name: create /vagrant/cache/boxes if it doesn't exist
+  - name: create /vagrant/cache/files if it doesn't exist
     shell: |
       if [[ "windows" == "{{ host_os | default('') }}" && "{{ cache_path }}" == "/tmp" ]]; then
         sudo su
       fi
-      mkdir -p {{ cache_path }}
+      mkdir -p {{ cache_path }}/files
     when:
       - cache_path is defined
       - cache_path != '/tmp'
@@ -47,7 +47,7 @@
 
   - name: is sonar-scanner archive cached?
     stat:
-      path: "/vagrant/cache/boxes/{{ sonar_scanner_archive }}"
+      path: "/vagrant/cache/files/{{ sonar_scanner_archive }}"
     register: archive_cached
 
   - name: cache https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/{{ sonar_scanner_archive }} to {{ cache_path }}
@@ -99,7 +99,7 @@
   - name: install sonar-scanner binary release
     become: yes
     unarchive:
-      src: /vagrant/cache/boxes/{{ sonar_scanner_archive }}
+      src: "{{ cache_path }}/files/{{ sonar_scanner_archive }}"
       dest: /usr/local/
       remote_src: yes
 
