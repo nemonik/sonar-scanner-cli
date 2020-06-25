@@ -25,7 +25,7 @@
 
 - name: install sonar-scanner cli
   block:
-  - name: create /vagrant/cache/files if it doesn't exist
+  - name: create {{ cache_path }}/files if it doesn't exist
     shell: |
       if [[ "windows" == "{{ host_os | default('') }}" && "{{ cache_path }}" == "/tmp" ]]; then
         sudo su
@@ -47,7 +47,7 @@
 
   - name: is sonar-scanner archive cached?
     stat:
-      path: "/vagrant/cache/files/{{ sonar_scanner_archive }}"
+      path: "{{ cache_path }}/files/{{ sonar_scanner_archive }}"
     register: archive_cached
 
   - name: cache https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/{{ sonar_scanner_archive }} to {{ cache_path }}
@@ -55,7 +55,7 @@
       if [[ "windows" == "{{ host_os | default('') }}" && "{{ cache_path }}" == "/tmp" ]]; then
         sudo su
       fi
-      wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/{{ sonar_scanner_archive }} --directory-prefix={{ cache_path }}
+      wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/{{ sonar_scanner_archive }} --directory-prefix={{ cache_path }}/files
     args:
       executable: /bin/bash
     retries: "{{ default_retries }}"
